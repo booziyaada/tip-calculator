@@ -173,7 +173,7 @@ input[type=number] {
     cursor: pointer;
 }
 
-@media screen and (min-width : 1200px) {
+@media screen and (min-width : 600px) {
     .mainContainer {
         display: flex;
         width: 920px;
