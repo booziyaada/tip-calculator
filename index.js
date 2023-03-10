@@ -1,87 +1,141 @@
-let bill = 0;
+let bill = 100;
 let peopleCount = 1;
-let tipPercentage = 15;
+let tipPercantage = 50;
 
-function calculateTip() {
-  let totalTip = bill * (tipPercentage / 100);
-  let tipPerPerson = totalTip / peopleCount;
+function calculateTip(){
+  let totalTip = bill* (tipPercantage/100);
+  let tipPerPerson = totalTip/peopleCount;
 
-  const tipPerPersonEl = document.getElementById("tip-per-person");
-  const totalTipEl = document.getElementById("total-tip");
+  document.getElementById("tip-per-person").innerHTML = "$" + tipPerPerson.toFixed(2);
+  document.getElementById("total-tip").innerHTML = "$" + totalTip.toFixed(2);
 
-  tipPerPersonEl.innerHTML = tipPerPerson.toFixed(2);
-  totalTipEl.innerHTML = totalTip.toFixed(2);
-
-  // query tip-per-person and update its content
-  // query total-tip and update its content
 }
 
-function handleBillChange(event) {
-  bill = event.target.value;
+function changeTotalBill(){
+  bill = document.getElementById("bill-input").value;
   calculateTip();
 }
 
-function handlePeopleCountChange(event) {
-  peopleCount = event.target.value;
+function changeNumberOfPeople(){
+  peopleCount = document.getElementById("people-count").value;
   calculateTip();
 }
 
-function handleCustomPercentChange(event) {
-  tipPercentage = event.target.value;
-  let oldPercentageEl = document.getElementsByClassName(
-    "selected-percentage"
-  )[0];
-  oldPercentageEl?.classList.remove("selected-percentage");
-  calculateTip();
-}
-
-function handleTipPercentageChange(event) {
-  let newPercentageEl = event.target;
-  tipPercentage = newPercentageEl.dataset.percent;
-
-  let oldPercentageEl = document.getElementsByClassName(
-    "selected-percentage"
-  )[0];
-
-  oldPercentageEl?.classList.remove("selected-percentage");
-  newPercentageEl.classList.add("selected-percentage");
-
-  customPercentEl = document.getElementById("custom-percentage");
-  customPercentEl.value = undefined;
-
-  calculateTip();
-}
-
-function handleReset() {
+function clickReset(){
   bill = 0;
   peopleCount = 1;
-  tipPercentage = 15;
+  tipPercantage = 10;
 
-  const billInputEl = document.getElementById("bill-input");
-  const peopleCountEl = document.getElementById("people-count");
-  const customPercentEl = document.getElementById("custom-percentage");
+  document.getElementById("bill-input").value= bill;
+  document.getElementById("people-count").value = peopleCount;
+  calculateTip();
+}
 
-  billInputEl.value = bill;
-  peopleCountEl.value = peopleCount;
-  customPercentEl.value = tipPercentage;
+function changeCustomPercentage(){
+  tipPercantage = document.getElementById("custom-percentage").value;
+  calculateTip();
+}
+
+function tipPercantageChange(){
 
   calculateTip();
 }
 
-const fixedPercentages = [5, 10, 15, 25, 50];
+let percentages = [50,25,15,10,5]
 
-function createPercentageButtons(percentages) {
-  const parentDiv = document.getElementsByClassName("tip-percentages")[0];
-  for (let i = 0; i < percentages.length; i++) {
+function percentageButtons(){
+  const buttonContainer = document.getElementsByClassName("tip-percentages")[0];
+  for(i=0;i<percentages.length;i++){
     const button = document.createElement("button");
-    button.setAttribute("data-percent", percentages[i]);
-    button.setAttribute("class", "percentage-btn");
+    button.setAttribute("class","percentage-btn");
     button.innerHTML = `${percentages[i]}%`;
-    button.addEventListener("click", handleTipPercentageChange);
-    parentDiv.prepend(button);
+    button.addEventListener("click",tipPercantageChange)
+    buttonContainer.prepend(button);
   }
 }
 
-createPercentageButtons(fixedPercentages);
+percentageButtons();
 
 calculateTip();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function handleCustomPercentChange(event) {
+//   tipPercentage = event.target.value;
+//   let oldPercentageEl = document.getElementsByClassName(
+//     "selected-percentage"
+//   )[0];
+//   oldPercentageEl?.classList.remove("selected-percentage");
+//   calculateTip();
+// }
+
+// function handleTipPercentageChange(event) {
+//   let newPercentageEl = event.target;
+//   tipPercentage = newPercentageEl.dataset.percent;
+
+//   let oldPercentageEl = document.getElementsByClassName(
+//     "selected-percentage"
+//   )[0];
+
+//   oldPercentageEl?.classList.remove("selected-percentage");
+//   newPercentageEl.classList.add("selected-percentage");
+
+//   customPercentEl = document.getElementById("custom-percentage");
+//   customPercentEl.value = undefined;
+
+//   calculateTip();
+// }
+
+// const fixedPercentages = [5, 10, 15, 25, 50];
+
+// function createPercentageButtons(percentages) {
+//   const parentDiv = document.getElementsByClassName("tip-percentages")[0];
+//   for (let i = 0; i < percentages.length; i++) {
+//     const button = document.createElement("button");
+//     button.setAttribute("data-percent", percentages[i]);
+//     button.setAttribute("class", "percentage-btn");
+//     button.innerHTML = `${percentages[i]}%`;
+//     button.addEventListener("click", handleTipPercentageChange);
+//     parentDiv.prepend(button);
+//   }
+// }
+
+
